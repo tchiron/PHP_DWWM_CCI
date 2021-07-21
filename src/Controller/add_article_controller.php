@@ -29,22 +29,9 @@ if (isset($article_title) && isset($article_description)) {
 if (!(isset($article_title) && isset($article_description)) || !empty($error_messages)) {
     include "../View/add_article.php";
 } else {
+    include "../Dao/article_dao.php";
     try {
-        $dbh = new PDO(
-            "mysql:host=localhost;dbname=ccib;charset=UTF8",
-            "root",
-            "",
-            [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-            ]
-        );
-
-        $req = $dbh->prepare("INSERT INTO article (title, description) VALUES (:title, :description)");
-
-        $req->execute([
-            ":title" => $article_title,
-            ":description" => $article_description
-        ]);
+        add_article($article_title, $article_description);
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
