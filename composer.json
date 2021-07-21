@@ -1,0 +1,9 @@
+{
+    "name": "ccib/blog",
+    "autoload": {
+        "psr-4": {
+            "Formationpeweb\\Blog\\": "src/"
+        }
+    },
+    "require": {}
+}
