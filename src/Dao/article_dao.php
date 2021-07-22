@@ -35,3 +35,11 @@ function get_all_article(): array
     $result = $req->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
+
+function get_article_by_id(int $id) : bool|array {
+    $dbh = getPDO();
+    $req = $dbh->prepare("SELECT * FROM article WHERE id_article = :id");
+    $req->execute([":id" => $id]);
+    $result = $req->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
