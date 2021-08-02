@@ -2,6 +2,16 @@
 
 require_once "Pdo/pdo_dao.php";
 
+function add_commentaire(array $commentaire): void
+{
+    $dbh = getPDO();
+    $req = $dbh->prepare("INSERT INTO commentaire (contenu, id_article) VALUES (:contenu, :id_article)");
+    $req->execute([
+        ":id_article" => $commentaire["article_id"],
+        ":contenu" => $commentaire["contenu"]
+    ]);
+}
+
 function get_commentaire_by_article_id(int $article_id): array
 {
     $dbh = getPDO();
