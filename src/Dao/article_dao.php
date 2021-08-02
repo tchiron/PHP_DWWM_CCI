@@ -1,21 +1,6 @@
 <?php
 
-function getPDO(): PDO
-{
-    static $dbh = "";
-
-    if (!($dbh instanceof PDO)) {
-        $dbh = new PDO(
-            "mysql:host=localhost;dbname=ccib;charset=UTF8",
-            "root",
-            "",
-            [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-            ]
-        );
-    }
-    return $dbh;
-}
+require_once "Pdo/pdo_dao.php";
 
 function add_article(string $title, string $description): void
 {

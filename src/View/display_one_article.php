@@ -8,6 +8,14 @@ include 'header.php';
     <a href="edit_article_controller.php?id=<?= $article["id_article"] ?>">Editer l'article</a>
     <a href="delete_article_controller.php?id=<?= $article["id_article"] ?>">Supprimer l'article</a>
 </article>
+<?php if (!empty($commentaires)) : ?>
+    <div>
+        <?php foreach ($commentaires as $commentaire) : ?>
+            <div><span><?= $commentaire["date_creation"] ?></span>
+                <p><?= $commentaire["contenu"] ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
 
-<?php
-include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
