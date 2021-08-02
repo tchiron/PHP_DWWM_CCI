@@ -6,13 +6,8 @@ if ($article_id !== false) {
     include "../Dao/article_dao.php";
 
     try {
-        $article = get_article_by_id($article_id);
-
-        if (!empty($article)) {
-            include "../View/display_one_article.php";
-        } else {
-            header("location:display_articles_controller.php");
-        }
+        delete_article($article_id);
+        header("location:display_articles_controller.php");
     } catch (PDOException $e) {
         echo $e->getMessage();
     }

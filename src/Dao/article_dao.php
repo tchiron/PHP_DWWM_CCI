@@ -58,3 +58,14 @@ function update_article(array $article): void
         ":id" => $article["id_article"]
     ]);
 }
+
+function delete_article(int $id): void
+{
+    $dbh = getPDO();
+    $req = $dbh->prepare("DELETE FROM article WHERE id_article = :id");
+    $req->execute(
+        [
+            ":id" => $id
+        ]
+    );
+}
