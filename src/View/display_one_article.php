@@ -13,6 +13,7 @@ include 'header.php';
     <div>
         <?php foreach ($commentaires as $commentaire) : ?>
             <div><span><?= $commentaire["date_creation"] ?></span>
+                <a href="edit_commentaire_controller.php?article=<?= $article["id_article"] ?>&amp;id=<?= $commentaire["id_commentaire"] ?>">Editer le commentaire</a>
                 <p><?= $commentaire["contenu"] ?></p>
             </div>
         <?php endforeach; ?>
