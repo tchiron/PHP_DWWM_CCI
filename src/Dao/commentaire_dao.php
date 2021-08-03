@@ -44,3 +44,14 @@ function update_commentaire(array $commentaire): void
         ":id_commentaire" => $commentaire["id_commentaire"]
     ]);
 }
+
+function delete_commentaire(int $id): void
+{
+    $dbh = getPDO();
+    $req = $dbh->prepare("DELETE FROM commentaire WHERE id_commentaire = :id");
+    $req->execute(
+        [
+            ":id" => $id
+        ]
+    );
+}
