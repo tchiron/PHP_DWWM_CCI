@@ -36,10 +36,10 @@ if (empty($_POST)) {
     }
 
     if (empty($error_messages)) {
-        $signup_user = new User();
-        $signup_user->setPseudo($signup_post["pseudo"]);
-        $signup_user->setEmail($signup_post["email"]);
-        $signup_user->setPwd($signup_post["pwd"]);
+        $signup_user = (new User())
+            ->setPseudo($signup_post["pseudo"])
+            ->setEmail($signup_post["email"])
+            ->setPwd($signup_post["pwd"]);
 
         try {
             $userDao = new UserDao();

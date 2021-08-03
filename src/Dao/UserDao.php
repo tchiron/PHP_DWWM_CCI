@@ -34,4 +34,11 @@ class UserDao
             ":pwd" => $user->getPwd()
         ]);
     }
+
+    function get_all_user(): array
+    {
+        $req = $this->pdo->prepare("SELECT id_user, nom, prenom, pseudo, email, date_creation, id_genre, id_group FROM user");
+        $req->execute();
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
