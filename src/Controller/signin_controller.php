@@ -61,7 +61,7 @@ if (empty($_POST)) {
                         ->setGroup($result["groupe"]);
 
                     session_regenerate_id(true);
-                    $_SESSION["user"] = $user;
+                    $_SESSION["user"] = serialize($user);
                     header("Location: display_articles_controller.php");
                     exit;
                 } else {

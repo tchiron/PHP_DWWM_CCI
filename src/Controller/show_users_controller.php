@@ -1,11 +1,11 @@
 <?php
 
+include "../../vendor/autoload.php";
+
 session_start();
 
 use dao\UserDao;
 use model\User;
-
-include "../../vendor/autoload.php";
 
 try {
     $userDao = new UserDao();

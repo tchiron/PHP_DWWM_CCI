@@ -1,5 +1,7 @@
 <?php
 
+include "../../vendor/autoload.php";
+
 session_start();
 
 $options_title = ["options" => [
