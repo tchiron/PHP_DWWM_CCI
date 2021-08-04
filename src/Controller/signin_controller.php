@@ -49,6 +49,7 @@ if (empty($_POST)) {
 
                 if (password_verify($signin_user->getPwd(), $user->getPwd())) {
                     $result = $userDao->getUserById($user->getId_user());
+                    
                     $user = (new User())
                         ->setId_user($result["id"])
                         ->setNom($result["nom"])
@@ -58,6 +59,8 @@ if (empty($_POST)) {
                         ->setDate_creation($result["date_creation"])
                         ->setGenre($result["genre"])
                         ->setGroup($result["groupe"]);
+
+                    session_regenerate_id(true);
                     $_SESSION["user"] = $user;
                     header("Location: display_articles_controller.php");
                     exit;
