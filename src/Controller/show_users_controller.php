@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 use dao\UserDao;
 use model\User;
 

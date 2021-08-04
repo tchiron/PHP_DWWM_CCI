@@ -5,6 +5,13 @@ include "../../vendor/autoload.php";
 use dao\UserDao;
 use model\User;
 
+session_start();
+
+if (isset($_SESSION["user"])) {
+    header("Location: display_articles_controller.php");
+    exit;
+}
+
 if (empty($_POST)) {
     include "../View/signup.php";
 } else {

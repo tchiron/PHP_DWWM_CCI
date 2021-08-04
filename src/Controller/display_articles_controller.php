@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include "../Dao/article_dao.php";
 
 try {

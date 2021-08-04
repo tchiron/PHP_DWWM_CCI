@@ -54,4 +54,35 @@ class UserDao
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getUserById(int $id): array
+    {
+        $req = $this->pdo->prepare("SELECT u.id_user AS id,
+                                        u.nom AS nom,
+                                        u.prenom AS prenom,
+                                        u.pseudo AS pseudo,
+                                        u.email AS email,
+                                        u.date_creation AS date_creation,
+                                        g.type AS genre,
+                                        r.nom AS groupe
+                                    FROM user AS u
+                                    LEFT OUTER JOIN genre AS g
+                                        ON u.id_genre = g.id_genre
+                                    LEFT OUTER JOIN groupe AS r
+                                        ON u.id_group = r.id_group
+                                    WHERE u.id_user = :id_user
+        ");
+        $req->execute([":id_user" => $id]);
+        return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getUserByEmail(string $email): array
+    {
+        $req = $this->pdo->prepare("SELECT id_user, email, pwd
+                                    FROM user
+                                    WHERE email = :email
+        ");
+        $req->execute([":email" => $email]);
+        return $req->fetch(PDO::FETCH_ASSOC);
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $options_title = ["options" => [
     "regexp" => "#^[A-Z]#u"
 ]];
