@@ -35,7 +35,7 @@ class UserDao
         ]);
     }
 
-    function get_all_user(): array
+    public function getAllUser(): array
     {
         $req = $this->pdo->prepare("SELECT u.id_user AS id,
                                         u.nom AS nom,

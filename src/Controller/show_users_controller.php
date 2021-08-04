@@ -7,7 +7,7 @@ include "../../vendor/autoload.php";
 
 try {
     $userDao = new UserDao();
-    $listUsers = $userDao->get_all_user();
+    $listUsers = $userDao->getAllUser();
 
     foreach ($listUsers as $key => $user) {
         $listUsers[$key] = (new User())
