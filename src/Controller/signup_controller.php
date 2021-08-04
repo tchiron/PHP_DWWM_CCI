@@ -39,7 +39,7 @@ if (empty($_POST)) {
         $signup_user = (new User())
             ->setPseudo($signup_post["pseudo"])
             ->setEmail($signup_post["email"])
-            ->setPwd($signup_post["pwd"]);
+            ->setPwd(password_hash($signup_post["pwd"], PASSWORD_DEFAULT));
 
         try {
             $userDao = new UserDao();
