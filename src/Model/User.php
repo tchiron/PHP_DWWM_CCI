@@ -11,8 +11,8 @@ class User
     private string $email;
     private string $pwd;
     private $date_creation;
-    private ?int $id_genre;
-    private ?int $id_group;
+    private ?string $genre;
+    private ?string $group;
 
     public function __construct()
     {
@@ -159,41 +159,41 @@ class User
     }
 
     /**
-     * Get the value of id_genre
+     * Get the value of genre
      */ 
-    public function getId_genre()
+    public function getGenre()
     {
-        return $this->id_genre;
+        return $this->genre;
     }
 
     /**
-     * Set the value of id_genre
+     * Set the value of genre
      *
      * @return  self
      */ 
-    public function setId_genre($id_genre)
+    public function setGenre($genre)
     {
-        $this->id_genre = $id_genre;
+        $this->genre = $genre;
 
         return $this;
     }
 
     /**
-     * Get the value of id_group
+     * Get the value of group
      */ 
-    public function getId_group()
+    public function getGroup()
     {
-        return $this->id_group;
+        return $this->group;
     }
 
     /**
-     * Set the value of id_group
+     * Set the value of group
      *
      * @return  self
      */ 
-    public function setId_group($id_group)
+    public function setGroup($group)
     {
-        $this->id_group = $id_group;
+        $this->group = $group;
 
         return $this;
     }

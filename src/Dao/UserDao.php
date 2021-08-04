@@ -37,7 +37,20 @@ class UserDao
 
     function get_all_user(): array
     {
-        $req = $this->pdo->prepare("SELECT id_user, nom, prenom, pseudo, email, date_creation, id_genre, id_group FROM user");
+        $req = $this->pdo->prepare("SELECT u.id_user AS id,
+                                        u.nom AS nom,
+                                        u.prenom AS prenom,
+                                        u.pseudo AS pseudo,
+                                        u.email AS email,
+                                        u.date_creation AS date_creation,
+                                        g.type AS genre,
+                                        r.nom AS groupe
+                                    FROM user AS u
+                                    LEFT OUTER JOIN genre AS g
+                                        ON u.id_genre = g.id_genre
+                                    LEFT OUTER JOIN groupe AS r
+                                        ON u.id_group = r.id_group
+        ");
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }

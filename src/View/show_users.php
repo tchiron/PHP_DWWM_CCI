@@ -26,8 +26,8 @@ else :
                 <th>Pseudonyme</th>
                 <th>Email</th>
                 <th>Date de création</th>
-                <th>L'id du genre</th>
-                <th>L'id du groupe</th>
+                <th>Genre</th>
+                <th>Nom du groupe</th>
             </tr>
         </thead>
         <tbody>
@@ -43,8 +43,8 @@ else :
                     <td><?= $user->getPseudo() ?></td>
                     <td><?= $user->getEmail() ?></td>
                     <td><?= $user->getDate_creation() ?></td>
-                    <td><?= $user->getId_genre() ?></td>
-                    <td><?= $user->getId_group() ?></td>
+                    <td><?= $user->getGenre() ?></td>
+                    <td><?= $user->getGroup() ?></td>
                 </tr>
             <?php
             } while ($user = next($listUsers));
