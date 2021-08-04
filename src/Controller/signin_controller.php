@@ -39,27 +39,11 @@ if (empty($_POST)) {
 
         try {
             $userDao = new UserDao();
-            $result = $userDao->getUserByEmail($signin_user->getEmail());
+            $user = $userDao->getUserByEmail($signin_user->getEmail());
 
-            if (!empty($result)) {
-                $user = (new User())
-                    ->setId_user($result["id_user"])
-                    ->setEmail($result["email"])
-                    ->setPwd($result["pwd"]);
-
+            if (!is_null($user)) {
                 if (password_verify($signin_user->getPwd(), $user->getPwd())) {
-                    $result = $userDao->getUserById($user->getId_user());
-                    
-                    $user = (new User())
-                        ->setId_user($result["id"])
-                        ->setNom($result["nom"])
-                        ->setPrenom($result["prenom"])
-                        ->setPseudo($result["pseudo"])
-                        ->setEmail($result["email"])
-                        ->setDate_creation($result["date_creation"])
-                        ->setGenre($result["genre"])
-                        ->setGroup($result["groupe"]);
-
+                    $user = $userDao->getUserById($user->getId_user());
                     session_regenerate_id(true);
                     $_SESSION["user"] = serialize($user);
                     header("Location: display_articles_controller.php");
