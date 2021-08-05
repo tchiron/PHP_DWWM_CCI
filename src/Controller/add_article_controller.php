@@ -1,6 +1,7 @@
 <?php
 
 use dao\ArticleDao;
+use model\Article;
 
 include "../../vendor/autoload.php";
 
@@ -16,23 +17,29 @@ $args = [
     "description" => []
 ];
 
-$article = filter_input_array(INPUT_POST, $args);
+$article_post = filter_input_array(INPUT_POST, $args);
 
-if (isset($article["title"]) && isset($article["description"])) {
-    if ($article["title"] === false) {
+if (isset($article_post["title"]) && isset($article_post["description"])) {
+    if ($article_post["title"] === false) {
         $error_messages[] = "Titre inexistant";
     }
 
-    if (empty(trim($article["description"]))) {
+    if (empty(trim($article_post["description"]))) {
         $error_messages[] = "Description inexistante";
     }
 }
 
-if (!(isset($article["title"]) && isset($article["description"])) || !empty($error_messages)) {
+if (!(isset($article_post["title"]) && isset($article_post["description"])) || !empty($error_messages)) {
     include "../View/add_article.php";
 } else {
+    $article = (new Article())
+        ->setTitle($article_post["title"])
+        ->setDescription($article_post["description"]);
+
     try {
-        (new ArticleDao())->addArticle($article["title"], $article["description"]);
+        $id = (new ArticleDao())->addArticle($article);
+        header(sprintf("Location: display_one_article_controller.php?id=%d", $id));
+        exit;
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
