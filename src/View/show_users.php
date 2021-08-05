@@ -49,6 +49,7 @@ else :
                     <td>
                         <a href="<?= sprintf("show_one_user_controller.php?id=%d", $user->getId_user()) ?>">Afficher</a>
                         <a href="<?= sprintf("edit_user_controller.php?id=%d", $user->getId_user()) ?>">Modifier</a>
+                        <a href="<?= sprintf("delete_user_controller.php?id=%d", $user->getId_user()) ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php

@@ -152,4 +152,10 @@ class UserDao
             ":group" => $user->getGroup(),
         ]);
     }
+
+    public function deleteUser(int $id): void
+    {
+        $req = $this->pdo->prepare("DELETE FROM user WHERE id_user = :id_user");
+        $req->execute([":id_user" => $id]);
+    }
 }
