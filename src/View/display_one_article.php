@@ -1,12 +1,12 @@
 <?php
-$title = sprintf("Affiche l'article %d", $article['id_article']);
+$title = sprintf("Affiche l'article %d", $article->getId_article());
 include 'header.php';
 ?>
 <article>
-    <h1><?= trim(filter_var($article["title"], FILTER_SANITIZE_FULL_SPECIAL_CHARS)) ?></h1>
-    <p><?= nl2br(trim(filter_var($article["description"], FILTER_SANITIZE_FULL_SPECIAL_CHARS))) ?></p>
-    <a href="edit_article_controller.php?id=<?= $article["id_article"] ?>">Editer l'article</a>
-    <a href="delete_article_controller.php?id=<?= $article["id_article"] ?>">Supprimer l'article</a>
+    <h1><?= trim(filter_var($article->getTitle(), FILTER_SANITIZE_FULL_SPECIAL_CHARS)) ?></h1>
+    <p><?= nl2br(trim(filter_var($article->getDescription(), FILTER_SANITIZE_FULL_SPECIAL_CHARS))) ?></p>
+    <a href="edit_article_controller.php?id=<?= $article->getId_article() ?>">Editer l'article</a>
+    <a href="delete_article_controller.php?id=<?= $article->getId_article() ?>">Supprimer l'article</a>
     <a href="add_commentaire_controller.php?id=<?= $article["id_article"] ?>">Ajouter un commentaire</a>
 </article>
 <?php if (!empty($commentaires)) : ?>

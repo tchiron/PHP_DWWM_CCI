@@ -2,7 +2,8 @@
     "name": "ccib/blog",
     "autoload": {
         "psr-4": {
-            "Formationpeweb\\Blog\\": "src/"
+            "model\\": "src/Model/",
+            "dao\\": "src/Dao/"
         }
     },
     "require": {}

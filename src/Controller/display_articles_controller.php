@@ -1,9 +1,13 @@
 <?php
 
-include "../Dao/article_dao.php";
+use dao\ArticleDao;
+
+include "../../vendor/autoload.php";
+
+session_start();
 
 try {
-    $articles = get_all_article();
+    $articles = (new ArticleDao())->getAllArticle();
     include "../View/display_articles.php";
 } catch (PDOException $e) {
     echo $e->getMessage();

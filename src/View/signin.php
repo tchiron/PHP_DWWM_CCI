@@ -1,5 +1,5 @@
 <?php
-$title = "Editer un article";
+$title = "Identifiez vous !";
 include 'header.php';
 
 if (!empty($error_messages)) : ?>
@@ -11,11 +11,11 @@ if (!empty($error_messages)) : ?>
         </ul>
     </div>
 <?php endif; ?>
-<form action="edit_article_controller.php?id=<?= $article->getId_article() ?>" method="post">
-    <input type="text" name="title" value="<?= $article->getTitle() ?>">
-    <textarea name="description" id="description" cols="30" rows="10">
-    <?= $article->getDescription() ?>
-    </textarea>
+
+<form action="" method="post">
+    <label for="email">Email : </label><input type="text" name="email" id="email">
+    <label for="pwd">Mot de passe : </label><input type="password" name="pwd" id="pwd">
     <input type="submit" value="Envoyer">
 </form>
+
 <?php include 'footer.php'; ?>
