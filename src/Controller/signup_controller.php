@@ -2,8 +2,8 @@
 
 include "../../vendor/autoload.php";
 
-use dao\UserDao;
-use model\User;
+use repository\UserDao;
+use entity\User;
 
 session_start();
 

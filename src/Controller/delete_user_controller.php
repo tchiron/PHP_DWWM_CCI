@@ -1,6 +1,6 @@
 <?php
 
-use dao\UserDao;
+use repository\UserDao;
 
 require "../../vendor/autoload.php";
 

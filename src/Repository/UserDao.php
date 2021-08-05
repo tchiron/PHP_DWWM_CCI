@@ -1,9 +1,9 @@
 <?php
 
-namespace dao;
+namespace repository;
 
 use PDO;
-use model\User;
+use entity\User;
 
 class UserDao
 {

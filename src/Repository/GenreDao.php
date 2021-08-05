@@ -1,11 +1,11 @@
 <?php
 
-namespace dao;
+namespace repository;
 
-use model\Groupe;
+use entity\Genre;
 use PDO;
 
-class GroupeDao
+class GenreDao
 {
     private PDO $pdo;
 
@@ -25,17 +25,16 @@ class GroupeDao
         );
     }
 
-    public function getAllGroupe(): array
+    public function getAllGenre(): array
     {
-        $req = $this->pdo->prepare("SELECT * FROM groupe");
+        $req = $this->pdo->prepare("SELECT * FROM genre");
         $req->execute();
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($result as $key => $groupe) {
-            $result[$key] = (new Groupe)
-                ->setId_group($groupe["id_group"])
-                ->setNom($groupe["nom"])
-                ->setId_user($groupe["id_user"]);
+        foreach ($result as $key => $genre) {
+            $result[$key] = (new Genre)
+                ->setId_genre($genre["id_genre"])
+                ->setType($genre["type"]);
         }
 
         return $result;

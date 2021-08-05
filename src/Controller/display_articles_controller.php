@@ -1,6 +1,6 @@
 <?php
 
-use dao\ArticleDao;
+use repository\ArticleDao;
 
 include "../../vendor/autoload.php";
 

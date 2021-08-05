@@ -1,9 +1,9 @@
 <?php
 
-use dao\GenreDao;
-use dao\GroupeDao;
-use dao\UserDao;
-use model\User;
+use repository\GenreDao;
+use repository\GroupeDao;
+use repository\UserDao;
+use entity\User;
 
 require "../../vendor/autoload.php";
 

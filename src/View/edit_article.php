@@ -13,9 +13,7 @@ if (!empty($error_messages)) : ?>
 <?php endif; ?>
 <form action="edit_article_controller.php?id=<?= $article->getId_article() ?>" method="post">
     <input type="text" name="title" value="<?= $article->getTitle() ?>">
-    <textarea name="description" id="description" cols="30" rows="10">
-    <?= $article->getDescription() ?>
-    </textarea>
+    <textarea name="description" id="description" cols="30" rows="10"><?= $article->getDescription() ?></textarea>
     <input type="submit" value="Envoyer">
 </form>
 <?php include 'footer.php'; ?>

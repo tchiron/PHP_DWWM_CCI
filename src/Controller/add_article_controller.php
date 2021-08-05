@@ -1,7 +1,7 @@
 <?php
 
-use dao\ArticleDao;
-use model\Article;
+use repository\ArticleDao;
+use entity\Article;
 
 include "../../vendor/autoload.php";
 

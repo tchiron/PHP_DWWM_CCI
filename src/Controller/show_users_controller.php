@@ -4,8 +4,7 @@ include "../../vendor/autoload.php";
 
 session_start();
 
-use dao\UserDao;
-use model\User;
+use repository\UserDao;
 
 try {
     $userDao = new UserDao();

@@ -1,8 +1,8 @@
 <?php
 
-namespace dao;
+namespace repository;
 
-use model\Article;
+use entity\Article;
 use PDO;
 
 class ArticleDao

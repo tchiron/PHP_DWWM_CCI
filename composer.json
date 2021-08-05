@@ -2,8 +2,8 @@
     "name": "ccib/blog",
     "autoload": {
         "psr-4": {
-            "model\\": "src/Model/",
-            "dao\\": "src/Dao/"
+            "entity\\": "src/Entity/",
+            "repository\\": "src/Repository/"
         }
     },
     "require": {}
