@@ -1,0 +1,91 @@
+<?php
+
+namespace dao;
+
+use model\Article;
+use PDO;
+
+class ArticleDao
+{
+    private $pdo;
+
+    public function __construct()
+    {
+        $conf = [
+            "dsn" => "mysql:host=localhost;dbname=ccib;charset=UTF8",
+            "user" => "root",
+            "password" => "",
+        ];
+        $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+        $this->pdo = new PDO(
+            $conf["dsn"],
+            $conf["user"],
+            $conf["password"],
+            $options
+        );
+    }
+
+    function addArticle(Article $article): void
+    {
+        $req = $this->pdo->prepare("INSERT INTO article (title, description)
+                                        VALUES (:title, :description)");
+        $req->execute([
+            ":title" => $article->getTitle(),
+            ":description" => $article->getDescription()
+        ]);
+    }
+
+    function getAllArticle(): array
+    {
+        $req = $this->pdo->prepare("SELECT * FROM article");
+        $req->execute();
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($result as $key => $article) {
+            $result[$key] = (new Article)
+                ->setId_article($article["article"])
+                ->setTitle($article["title"])
+                ->setDescription($article["description"])
+                ->setId_user($article["id_user"])
+                ->setDate_creation($article["date_creation"]);
+        }
+
+        return $result;
+    }
+
+    function getArticleById(int $id): ?Article
+    {
+        $req = $this->pdo->prepare("SELECT * FROM article WHERE id_article = :id_article");
+        $req->execute([":id_article" => $id]);
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+
+        if (!empty($result)) {
+            return (new Article)
+            ->setId_article($result["article"])
+            ->setTitle($result["title"])
+            ->setDescription($result["description"])
+            ->setId_user($result["id_user"])
+            ->setDate_creation($result["date_creation"]);
+        } else {
+            return null;
+        }
+    }
+
+    function updateArticle(Article $article): void
+    {
+        $req = $this->pdo->prepare("UPDATE article
+                        SET title = :title, description = :description
+                        WHERE id_article = :id");
+        $req->execute([
+            ":title" => $article->getTitle(),
+            ":description" => $article->getDescription(),
+            ":id" => $article->getId_article()
+        ]);
+    }
+
+    function deleteArticle(int $id): void
+    {
+        $req = $this->pdo->prepare("DELETE FROM article WHERE id_article = :id");
+        $req->execute([":id" => $id]);
+    }
+}

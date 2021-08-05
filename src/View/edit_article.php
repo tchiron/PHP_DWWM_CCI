@@ -11,10 +11,10 @@ if (!empty($error_messages)) : ?>
         </ul>
     </div>
 <?php endif; ?>
-<form action="edit_article_controller.php?id=<?= $article["id_article"] ?>" method="post">
-    <input type="text" name="title" value="<?= $article["title"] ?>">
+<form action="edit_article_controller.php?id=<?= $article->getId_article() ?>" method="post">
+    <input type="text" name="title" value="<?= $article->getTitle() ?>">
     <textarea name="description" id="description" cols="30" rows="10">
-    <?= $article["description"] ?>
+    <?= $article->getDescription() ?>
     </textarea>
     <input type="submit" value="Envoyer">
 </form>

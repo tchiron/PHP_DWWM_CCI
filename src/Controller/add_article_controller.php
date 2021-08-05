@@ -1,41 +1,38 @@
 <?php
 
+use dao\ArticleDao;
+
 include "../../vendor/autoload.php";
 
 session_start();
 
-$options_title = ["options" => [
-    "regexp" => "#^[A-Z]#u"
-]];
+$args = [
+    "title" => [
+        "filter" => FILTER_VALIDATE_REGEXP,
+        "options" => [
+            "regexp" => "#^[A-Z]#u"
+        ]
+    ],
+    "description" => []
+];
 
-$article_title = filter_input(
-    INPUT_POST,
-    "title",
-    FILTER_VALIDATE_REGEXP,
-    $options_title
-);
+$article = filter_input_array(INPUT_POST, $args);
 
-$article_description =  filter_input(
-    INPUT_POST,
-    "description"
-);
-
-if (isset($article_title) && isset($article_description)) {
-    if ($article_title === false) {
+if (isset($article["title"]) && isset($article["description"])) {
+    if ($article["title"] === false) {
         $error_messages[] = "Titre inexistant";
     }
 
-    if (empty(trim($article_description))) {
+    if (empty(trim($article["description"]))) {
         $error_messages[] = "Description inexistante";
     }
 }
 
-if (!(isset($article_title) && isset($article_description)) || !empty($error_messages)) {
+if (!(isset($article["title"]) && isset($article["description"])) || !empty($error_messages)) {
     include "../View/add_article.php";
 } else {
-    include "../Dao/article_dao.php";
     try {
-        add_article($article_title, $article_description);
+        (new ArticleDao())->addArticle($article["title"], $article["description"]);
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
