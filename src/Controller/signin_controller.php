@@ -51,18 +51,15 @@ if (empty($_POST)) {
                 } else {
                     $error_messages[] = "Mot de passe erroné";
                     include "../View/signin.php";
-                    exit;
                 }
             } else {
                 $error_messages[] = "Email erroné";
                 include "../View/signin.php";
-                exit;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     } else {
         include "../View/signin.php";
-        exit;
     }
 }

@@ -28,6 +28,7 @@ else :
                 <th>Date de création</th>
                 <th>Genre</th>
                 <th>Nom du groupe</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -45,6 +46,10 @@ else :
                     <td><?= $user->getDate_creation() ?></td>
                     <td><?= $user->getGenre() ?></td>
                     <td><?= $user->getGroup() ?></td>
+                    <td>
+                        <a href="<?= sprintf("show_one_user_controller.php?id=%d", $user->getId_user()) ?>">Afficher</a>
+                        <a href="<?= sprintf("edit_user_controller.php?id=%d", $user->getId_user()) ?>">Modifier</a>
+                    </td>
                 </tr>
             <?php
             } while ($user = next($listUsers));
