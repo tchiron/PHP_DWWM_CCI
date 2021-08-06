@@ -25,7 +25,6 @@ if ($article_id !== false) {
             echo $e->getMessage();
         }
     } else {
-
         $args = [
             "title" => [
                 "filter" => FILTER_VALIDATE_REGEXP,

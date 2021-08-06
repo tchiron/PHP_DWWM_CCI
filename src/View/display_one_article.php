@@ -12,10 +12,10 @@ include 'header.php';
 <?php if (!empty($commentaires)) : ?>
     <div>
         <?php foreach ($commentaires as $commentaire) : ?>
-            <div><span><?= $commentaire["date_creation"] ?></span>
-            <a href="edit_commentaire_controller.php?article=<?= $article->getId_article() ?>&amp;id=<?= $commentaire["id_commentaire"] ?>">Editer le commentaire</a>
-            <a href="delete_commentaire_controller.php?article=<?= $article->getId_article() ?>&amp;id=<?= $commentaire["id_commentaire"] ?>">Supprimer le commentaire</a>
-                <p><?= $commentaire["contenu"] ?></p>
+            <div><span><?= $commentaire->getDateCreation() ?></span>
+            <a href="edit_commentaire_controller.php?article=<?= $article->getId_article() ?>&amp;id=<?= $commentaire->getIdCommentaire() ?>">Editer le commentaire</a>
+            <a href="delete_commentaire_controller.php?article=<?= $article->getId_article() ?>&amp;id=<?= $commentaire->GetIdCommentaire() ?>">Supprimer le commentaire</a>
+                <p><?= $commentaire->getContenu() ?></p>
             </div>
         <?php endforeach; ?>
     </div>
