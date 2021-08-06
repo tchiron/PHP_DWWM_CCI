@@ -1,8 +1,8 @@
 <?php
 
-use repository\GenreDao;
-use repository\GroupeDao;
-use repository\UserDao;
+use repository\GenreRepository;
+use repository\GroupeRepository;
+use repository\UserRepository;
 use entity\User;
 
 require "../../vendor/autoload.php";
@@ -13,10 +13,10 @@ $user_id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
 if ($user_id !== false) {
     try {
-        $userDao = new UserDao();
+        $userDao = new UserRepository();
         $user = $userDao->getUserById($user_id);
-        $genres = (new GenreDao())->getAllGenre();
-        $groupes = (new GroupeDao())->getAllGroupe();
+        $genres = (new GenreRepository())->getAllGenre();
+        $groupes = (new GroupeRepository())->getAllGroupe();
     } catch (PDOException $e) {
         echo $e->getMessage();
     }

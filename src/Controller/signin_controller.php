@@ -2,7 +2,7 @@
 
 include "../../vendor/autoload.php";
 
-use repository\UserDao;
+use repository\UserRepository;
 use entity\User;
 
 session_start();
@@ -38,7 +38,7 @@ if (empty($_POST)) {
             ->setPwd($signin_user["pwd"]);
 
         try {
-            $userDao = new UserDao();
+            $userDao = new UserRepository();
             $user = $userDao->getUserByEmail($signin_user->getEmail());
 
             if (!is_null($user)) {

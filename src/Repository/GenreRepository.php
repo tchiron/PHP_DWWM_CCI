@@ -5,7 +5,7 @@ namespace repository;
 use entity\Genre;
 use PDO;
 
-class GenreDao
+class GenreRepository
 {
     private PDO $pdo;
 

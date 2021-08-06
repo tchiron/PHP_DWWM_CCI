@@ -10,7 +10,7 @@ if ($commentaire_id !== false && $article_id !== false) {
     ];
 
     if (empty($_POST)) {
-        include "../Dao/commentaire_dao.php";
+        include "../Repository/commentaire_dao.php";
 
         try {
             $commentaire = get_commentaire_by_id($commentaire_id);
@@ -28,7 +28,7 @@ if ($commentaire_id !== false && $article_id !== false) {
         if (!isset($commentaire["contenu"]) || !empty($error_messages)) {
             include "../View/edit_commentaire.php";
         } else {
-            include "../Dao/commentaire_dao.php";
+            include "../Repository/commentaire_dao.php";
 
             try {
                 update_commentaire($commentaire);

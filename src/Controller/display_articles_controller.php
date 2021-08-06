@@ -1,13 +1,13 @@
 <?php
 
-use repository\ArticleDao;
+use repository\ArticleRepository;
 
 include "../../vendor/autoload.php";
 
 session_start();
 
 try {
-    $articles = (new ArticleDao())->getAllArticle();
+    $articles = (new ArticleRepository())->getAllArticle();
     include "../View/display_articles.php";
 } catch (PDOException $e) {
     echo $e->getMessage();

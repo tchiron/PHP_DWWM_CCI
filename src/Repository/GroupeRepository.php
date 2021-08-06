@@ -5,7 +5,7 @@ namespace repository;
 use entity\Groupe;
 use PDO;
 
-class GroupeDao
+class GroupeRepository
 {
     private PDO $pdo;
 

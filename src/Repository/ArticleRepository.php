@@ -5,7 +5,7 @@ namespace repository;
 use entity\Article;
 use PDO;
 
-class ArticleDao
+class ArticleRepository
 {
     private $pdo;
 

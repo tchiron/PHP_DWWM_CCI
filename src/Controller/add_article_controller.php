@@ -1,6 +1,6 @@
 <?php
 
-use repository\ArticleDao;
+use repository\ArticleRepository;
 use entity\Article;
 
 include "../../vendor/autoload.php";
@@ -37,7 +37,7 @@ if (!(isset($article_post["title"]) && isset($article_post["description"])) || !
         ->setDescription($article_post["description"]);
 
     try {
-        $id = (new ArticleDao())->addArticle($article);
+        $id = (new ArticleRepository())->addArticle($article);
         header(sprintf("Location: display_one_article_controller.php?id=%d", $id));
         exit;
     } catch (PDOException $e) {

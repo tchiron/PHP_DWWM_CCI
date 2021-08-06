@@ -5,7 +5,7 @@ namespace repository;
 use PDO;
 use entity\User;
 
-class UserDao
+class UserRepository
 {
     private PDO $pdo;
 

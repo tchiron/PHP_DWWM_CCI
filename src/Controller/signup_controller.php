@@ -2,7 +2,7 @@
 
 include "../../vendor/autoload.php";
 
-use repository\UserDao;
+use repository\UserRepository;
 use entity\User;
 
 session_start();
@@ -43,16 +43,22 @@ if (empty($_POST)) {
     }
 
     if (empty($error_messages)) {
-        $signup_user = (new User())
-            ->setPseudo($signup_post["pseudo"])
-            ->setEmail($signup_post["email"])
-            ->setPwd(password_hash($signup_post["pwd"], PASSWORD_DEFAULT));
-
         try {
-            $userDao = new UserDao();
-            $userDao->addUser($signup_user);
-            header("Location: display_articles_controller.php");
-            exit;
+            $userDao = new UserRepository();
+            $exist_user = $userDao->getUserByEmail($signup_post["email"]);
+
+            if (is_null($exist_user)) {
+                $signup_user = (new User())
+                    ->setPseudo($signup_post["pseudo"])
+                    ->setEmail($signup_post["email"])
+                    ->setPwd(password_hash($signup_post["pwd"], PASSWORD_DEFAULT));
+                $userDao->addUser($signup_user);
+                header("Location: display_articles_controller.php");
+                exit;
+            } else {
+                $error_messages[] = "Cet email est déjà utilisé";
+                include "../View/signup.php";
+            }
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

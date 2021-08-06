@@ -1,6 +1,6 @@
 <?php
 
-use repository\UserDao;
+use repository\UserRepository;
 
 require "../../vendor/autoload.php";
 
@@ -10,7 +10,7 @@ $user_id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
 if ($user_id !== false) {
     try {
-        $userDao = new UserDao();
+        $userDao = new UserRepository();
         $user = $userDao->getUserById($user_id);
 
         if (!is_null($user)) {

@@ -1,6 +1,6 @@
 <?php
 
-use repository\ArticleDao;
+use repository\ArticleRepository;
 
 include "../../vendor/autoload.php";
 
@@ -9,9 +9,9 @@ session_start();
 $article_id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
 if ($article_id !== false) {
-    include "../Dao/commentaire_dao.php";
+    include "../Repository/commentaire_dao.php";
     try {
-        $article = (new ArticleDao())->getArticleById($article_id);
+        $article = (new ArticleRepository())->getArticleById($article_id);
 
         if (!is_null($article)) {
             $commentaires = get_commentaire_by_article_id($article_id);

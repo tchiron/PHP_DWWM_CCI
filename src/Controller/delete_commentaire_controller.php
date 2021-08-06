@@ -4,7 +4,7 @@ $article_id = filter_input(INPUT_GET, "article", FILTER_VALIDATE_INT);
 $commentaire_id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
 if ($article_id !== false && $commentaire_id !== false) {
-    include "../Dao/commentaire_dao.php";
+    include "../Repository/commentaire_dao.php";
 
     try {
         delete_commentaire($commentaire_id);

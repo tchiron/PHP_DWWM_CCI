@@ -18,7 +18,7 @@ if ($article_id !== false) {
         if (!isset($commentaire["contenu"]) || !empty($error_messages)) {
             include "../View/add_commentaire.php";
         } else {
-            include "../Dao/commentaire_dao.php";
+            include "../Repository/commentaire_dao.php";
             try {
                 add_commentaire($commentaire);
                 header(sprintf("location: display_one_article_controller.php?id=%d", $commentaire["article_id"]));

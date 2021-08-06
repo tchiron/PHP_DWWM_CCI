@@ -1,6 +1,6 @@
 <?php
 
-use repository\ArticleDao;
+use repository\ArticleRepository;
 
 include "../../vendor/autoload.php";
 
@@ -10,7 +10,7 @@ $article_id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
 if ($article_id !== false) {
     try {
-        (new ArticleDao())->deleteArticle($article_id);
+        (new ArticleRepository())->deleteArticle($article_id);
         header("location:display_articles_controller.php");
         exit;
     } catch (PDOException $e) {

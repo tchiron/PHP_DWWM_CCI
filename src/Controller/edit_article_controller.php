@@ -1,6 +1,6 @@
 <?php
 
-use repository\ArticleDao;
+use repository\ArticleRepository;
 use entity\Article;
 
 include "../../vendor/autoload.php";
@@ -13,7 +13,7 @@ if ($article_id !== false) {
 
     if (empty($_POST)) {
         try {
-            $article = (new ArticleDao())->getArticleById($article_id);
+            $article = (new ArticleRepository())->getArticleById($article_id);
 
             if (!is_null($article)) {
                 include "../View/edit_article.php";
@@ -60,7 +60,7 @@ if ($article_id !== false) {
                 ->setDescription($article_post["description"]);
 
             try {
-                (new ArticleDao())->updateArticle($article);
+                (new ArticleRepository())->updateArticle($article);
                 header(sprintf("location:display_one_article_controller.php?id=%d", $article->getId_article()));
                 exit;
             } catch (PDOException $e) {

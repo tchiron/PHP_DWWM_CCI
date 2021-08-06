@@ -1,6 +1,6 @@
 <?php
 
-use repository\UserDao;
+use repository\UserRepository;
 
 require "../../vendor/autoload.php";
 
@@ -10,7 +10,7 @@ $user_id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
 if ($user_id !== false) {
     try {
-        (new UserDao())->deleteUser($user_id);
+        (new UserRepository())->deleteUser($user_id);
         header("Location: show_users_controller.php");
         exit;
     } catch (PDOException $e) {
