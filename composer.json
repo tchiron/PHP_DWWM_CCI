@@ -2,7 +2,8 @@
     "name": "ccib/blog",
     "autoload": {
         "psr-4": {
-            "Formationpeweb\\Blog\\": "src/"
+            "entity\\": "src/Entity/",
+            "repository\\": "src/Repository/"
         }
     },
     "require": {}

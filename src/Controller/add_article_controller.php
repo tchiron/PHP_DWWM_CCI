@@ -1,37 +1,45 @@
 <?php
 
-$options_title = ["options" => [
-    "regexp" => "#^[A-Z]#u"
-]];
+use repository\ArticleRepository;
+use entity\Article;
 
-$article_title = filter_input(
-    INPUT_POST,
-    "title",
-    FILTER_VALIDATE_REGEXP,
-    $options_title
-);
+include "../../vendor/autoload.php";
 
-$article_description =  filter_input(
-    INPUT_POST,
-    "description"
-);
+session_start();
 
-if (isset($article_title) && isset($article_description)) {
-    if ($article_title === false) {
+$args = [
+    "title" => [
+        "filter" => FILTER_VALIDATE_REGEXP,
+        "options" => [
+            "regexp" => "#^[A-Z]#u"
+        ]
+    ],
+    "description" => []
+];
+
+$article_post = filter_input_array(INPUT_POST, $args);
+
+if (isset($article_post["title"]) && isset($article_post["description"])) {
+    if ($article_post["title"] === false) {
         $error_messages[] = "Titre inexistant";
     }
 
-    if (empty(trim($article_description))) {
+    if (empty(trim($article_post["description"]))) {
         $error_messages[] = "Description inexistante";
     }
 }
 
-if (!(isset($article_title) && isset($article_description)) || !empty($error_messages)) {
+if (!(isset($article_post["title"]) && isset($article_post["description"])) || !empty($error_messages)) {
     include "../View/add_article.php";
 } else {
-    include "../Dao/article_dao.php";
+    $article = (new Article())
+        ->setTitle($article_post["title"])
+        ->setDescription($article_post["description"]);
+
     try {
-        add_article($article_title, $article_description);
+        $id = (new ArticleRepository())->addArticle($article);
+        header(sprintf("Location: display_one_article_controller.php?id=%d", $id));
+        exit;
     } catch (PDOException $e) {
         echo $e->getMessage();
     }

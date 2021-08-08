@@ -1,5 +1,5 @@
 <?php
-$title = "Editer un article";
+$title = "Edition d'un commentaire";
 include 'header.php';
 
 if (!empty($error_messages)) : ?>
@@ -11,9 +11,10 @@ if (!empty($error_messages)) : ?>
         </ul>
     </div>
 <?php endif; ?>
-<form action="edit_article_controller.php?id=<?= $article->getId_article() ?>" method="post">
-    <input type="text" name="title" value="<?= $article->getTitle() ?>">
-    <textarea name="description" id="description" cols="30" rows="10"><?= $article->getDescription() ?></textarea>
+
+<form action="edit_commentaire_controller.php?article=<?= $commentaire["id_article"] ?>&amp;id=<?= $commentaire["id_commentaire"] ?>" method="post">
+    <textarea name="contenu" id="contenu" cols="30" rows="10"><?= $commentaire["contenu"] ?></textarea>
     <input type="submit" value="Envoyer">
 </form>
+
 <?php include 'footer.php'; ?>
