@@ -50,6 +50,7 @@ class UserRepository
                                         ON u.id_genre = g.id_genre
                                     LEFT OUTER JOIN groupe AS r
                                         ON u.id_group = r.id_group
+                                    ORDER BY id ASC
         ");
         $req->execute();
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
