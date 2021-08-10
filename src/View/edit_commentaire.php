@@ -12,8 +12,8 @@ if (!empty($error_messages)) : ?>
     </div>
 <?php endif; ?>
 
-<form action="edit_commentaire_controller.php?article=<?= $commentaire["id_article"] ?>&amp;id=<?= $commentaire["id_commentaire"] ?>" method="post">
-    <textarea name="contenu" id="contenu" cols="30" rows="10"><?= $commentaire["contenu"] ?></textarea>
+<form action="edit_commentaire_controller.php?article=<?= $commentaire->getIdArticle() ?>&amp;id=<?= $commentaire->getIdCommentaire() ?>" method="post">
+    <textarea name="contenu" id="contenu" cols="30" rows="10"><?= $commentaire->getContenu() ?></textarea>
     <input type="submit" value="Envoyer">
 </form>
 
