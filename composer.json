@@ -2,6 +2,7 @@
     "name": "ccib/blog",
     "autoload": {
         "psr-4": {
+            "framework\\": "framework/",
             "entity\\": "src/Entity/",
             "repository\\": "src/Repository/"
         }
