@@ -7,7 +7,7 @@ use PDO;
 
 class CommentaireRepository
 {
-    private $pdo;
+    private PDO $pdo;
 
     public function __construct()
     {
