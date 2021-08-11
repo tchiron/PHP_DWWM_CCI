@@ -11,11 +11,7 @@ class CommentaireRepository
 
     public function __construct()
     {
-        $conf = [
-            "dsn" => "mysql:host=localhost;dbname=ccib;charset=UTF8",
-            "user" => "root",
-            "password" => "",
-        ];
+        $conf = parse_ini_file(MYSQL_FILE_PATH, false, INI_SCANNER_TYPED);
         $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
         $this->pdo = new PDO(
             $conf["dsn"],
