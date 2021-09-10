@@ -5,16 +5,16 @@ include 'header.php';
 <article>
     <h1><?= trim(filter_var($article->getTitle(), FILTER_SANITIZE_FULL_SPECIAL_CHARS)) ?></h1>
     <p><?= nl2br(trim(filter_var($article->getDescription(), FILTER_SANITIZE_FULL_SPECIAL_CHARS))) ?></p>
-    <a href="edit_article_controller.php?id=<?= $article->getId_article() ?>">Editer l'article</a>
-    <a href="delete_article_controller.php?id=<?= $article->getId_article() ?>">Supprimer l'article</a>
-    <a href="add_commentaire_controller.php?id=<?= $article->getId_article() ?>">Ajouter un commentaire</a>
+    <a href="/article/<?= $article->getId_article() ?>/edit">Editer l'article</a>
+    <a href="/article/<?= $article->getId_article() ?>/delete">Supprimer l'article</a>
+    <a href="/commentaire/<?= $article->getId_article() ?>/new">Ajouter un commentaire</a>
 </article>
 <?php if (!empty($commentaires)) : ?>
     <div>
         <?php foreach ($commentaires as $commentaire) : ?>
             <div><span><?= $commentaire->getDateCreation() ?></span>
-            <a href="edit_commentaire_controller.php?article=<?= $article->getId_article() ?>&amp;id=<?= $commentaire->getIdCommentaire() ?>">Editer le commentaire</a>
-            <a href="delete_commentaire_controller.php?article=<?= $article->getId_article() ?>&amp;id=<?= $commentaire->GetIdCommentaire() ?>">Supprimer le commentaire</a>
+            <a href="/commentaire/<?= $article->getId_article() ?>/<?= $commentaire->getIdCommentaire() ?>/edit">Editer le commentaire</a>
+            <a href="/commentaire/<?= $article->getId_article() ?>/<?= $commentaire->GetIdCommentaire() ?>/delete">Supprimer le commentaire</a>
                 <p><?= $commentaire->getContenu() ?></p>
             </div>
         <?php endforeach; ?>

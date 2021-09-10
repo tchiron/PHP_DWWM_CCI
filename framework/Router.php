@@ -12,11 +12,21 @@ class Router
 
     public function __construct(Request $request)
     {
-        $uri = $request->getUri();
+        $this->callback = $this->matchRoute($request->getUri());
+    }
 
-        $this->callback = match (true) {
-            1 === preg_match("#^/$#", $uri),
-            1 === preg_match("#^/article$#", $uri) => function (
+    /**
+     * Retrouve une action par rapport à la route
+     * 
+     * @param string $uri route récupéré dans la query string
+     * 
+     * @return Closure L'action a exécuté
+     */
+    private function matchRoute(string $uri): Closure
+    {
+        return match (1) {
+            preg_match("#^/$#", $uri),
+            preg_match("#^/article$#", $uri) => function (
                 Request $request,
                 Router $router,
                 Session $session
@@ -25,20 +35,44 @@ class Router
                     (new ArticleController($request, $router, $session))->index();
                 else $this->redirectToRoute("error404");
             },
-            1 === preg_match("#^/article/new$#", $uri) => function (
+            preg_match("#^/article/new$#", $uri) => function (
                 Request $request,
                 Router $router,
                 Session $session
             ) {
-                (new ArticleController($request, $router, $session))->new();
+                if ("GET" === $request->getMethod() || "POST" === $request->getMethod())
+                    (new ArticleController($request, $router, $session))->new();
+                else $this->redirectToRoute("error404");
             },
-            1 === preg_match("#^/article/([0-9]+)/show$#", $uri, $this->matches) => function (
+            preg_match("#^/article/([0-9]+)/show$#", $uri, $this->matches) => function (
                 Request $request,
                 Router $router,
                 Session $session,
                 array $matches
             ) {
-                (new ArticleController($request, $router, $session))->show($matches[1]);
+                if ("GET" === $request->getMethod())
+                    (new ArticleController($request, $router, $session))->show($matches[1]);
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/article/([0-9]+)/edit$#", $uri, $this->matches) => function (
+                Request $request,
+                Router $router,
+                Session $session,
+                array $matches
+            ) {
+                if ("GET" === $request->getMethod() || "POST" === $request->getMethod())
+                    (new ArticleController($request, $router, $session))->edit($matches[1]);
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/article/([0-9]+)/delete$#", $uri, $this->matches) => function (
+                Request $request,
+                Router $router,
+                Session $session,
+                array $matches
+            ) {
+                if ("GET" === $request->getMethod())
+                    (new ArticleController($request, $router, $session))->delete($matches[1]);
+                else $this->redirectToRoute("error404");
             },
             default => function () {
             }

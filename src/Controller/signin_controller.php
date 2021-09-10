@@ -45,7 +45,7 @@ if (empty($_POST)) {
                 if (password_verify($signin_user->getPwd(), $user->getPwd())) {
                     $user = $userDao->getUserById($user->getId_user());
                     session_regenerate_id(true);
-                    $_SESSION["user"] = serialize($user);
+                    $_SESSION["user"] = $user;
                     header("Location: display_articles_controller.php");
                     exit;
                 } else {

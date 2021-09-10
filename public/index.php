@@ -6,7 +6,7 @@ require "../config/setup.php";
 
 session_start();
 $session = new Session(
-    isset($_SESSION["user"]) ? unserialize($_SESSION["user"]) : null
+    ($_SESSION["user"]) ?? null
 );
 $request = new Request(
     filter_input(INPUT_SERVER, "REQUEST_URI"),
