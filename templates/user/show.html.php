@@ -1,5 +1,5 @@
 <?php
-$title = (unserialize($_SESSION["user"])->getId_user() === $user->getId_user()) ? "Mon profil" : sprintf("Le profil de %s", $user->getPseudo());
+$title = ($this->session->getUser()->getId_user() === $user->getId_user()) ? "Mon profil" : sprintf("Le profil de %s", $user->getPseudo());
 include TEMPLATES . DIRECTORY_SEPARATOR . 'header.php';
 ?>
 
