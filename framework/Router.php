@@ -7,7 +7,8 @@ use controller\{ArticleController,
     UserController,
     SignupController,
     SigninController,
-    SignoutController
+    SignoutController,
+    CommentaireController
 };
 
 class Router
@@ -147,6 +148,36 @@ class Router
             ) {
                 if ($request->getMethod() === "GET")
                     (new SignoutController($request, $router, $session))->index();
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/commentaire/([0-9]+)/new$#", $uri, $this->matches) => function (
+                Request $request,
+                Router  $router,
+                Session $session,
+                array   $matches
+            ) {
+                if ($request->getMethod() === "GET" || $request->getMethod() === "POST")
+                    (new CommentaireController($request, $router, $session))->new($matches[1]);
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/commentaire/([0-9]+)/([0-9]+)/edit$#", $uri, $this->matches) => function (
+                Request $request,
+                Router  $router,
+                Session $session,
+                array   $matches
+            ) {
+                if ($request->getMethod() === "GET" || $request->getMethod() === "POST")
+                    (new CommentaireController($request, $router, $session))->edit($matches[1], $matches[2]);
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/commentaire/([0-9]+)/([0-9]+)/delete$#", $uri, $this->matches) => function (
+                Request $request,
+                Router  $router,
+                Session $session,
+                array   $matches
+            ) {
+                if ($request->getMethod() === "GET")
+                    (new CommentaireController($request, $router, $session))->delete($matches[1], $matches[2]);
                 else $this->redirectToRoute("error404");
             },
             default => function () {
