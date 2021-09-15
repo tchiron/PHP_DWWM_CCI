@@ -6,7 +6,8 @@ use Closure;
 use controller\{ArticleController,
     UserController,
     SignupController,
-    SigninController
+    SigninController,
+    SignoutController
 };
 
 class Router
@@ -137,6 +138,15 @@ class Router
                     $this->redirectToRoute();
                 elseif ($request->getMethod() === "GET" || $request->getMethod() === "POST")
                     (new SigninController($request, $router, $session))->index();
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/signout$#", $uri) => function (
+                Request $request,
+                Router  $router,
+                Session $session
+            ) {
+                if ($request->getMethod() === "GET")
+                    (new SignoutController($request, $router, $session))->index();
                 else $this->redirectToRoute("error404");
             },
             default => function () {
