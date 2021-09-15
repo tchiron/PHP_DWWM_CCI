@@ -12,7 +12,7 @@ if (!empty($error_messages)) : ?>
     </div>
 <?php endif; ?>
 
-<form action="add_commentaire_controller.php?id=<?= $article_id ?>" method="post">
+<form action="" method="post">
     <textarea name="contenu" id="contenu" cols="30" rows="10"></textarea>
     <input type="submit" value="Envoyer">
 </form>
