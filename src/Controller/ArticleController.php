@@ -29,7 +29,7 @@ class ArticleController
     public function new()
     {
         if ("GET" === $this->request->getMethod()) {
-            require TEMPLATES . DIRECTORY_SEPARATOR . "article/add.html.php";
+            require TEMPLATES . DIRECTORY_SEPARATOR . "article/new.html.php";
         } elseif ("POST" === $this->request->getMethod()) {
             $args = [
                 "title" => [
@@ -54,14 +54,14 @@ class ArticleController
             }
 
             if (!(isset($article_post["title"]) && isset($article_post["description"])) || !empty($error_messages)) {
-                require TEMPLATES . DIRECTORY_SEPARATOR . "article/add.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR . "article/new.html.php";
             } else {
                 $article = (new Article())
                     ->setTitle($article_post["title"])
                     ->setDescription($article_post["description"]);
 
                 try {
-                    $id = (new ArticleRepository())->addArticle($article);
+                    $id = (new ArticleRepository())->newArticle($article);
                     $this->router->redirectToRoute("article", $id, "show");
                 } catch (PDOException $e) {
                     echo $e->getMessage();

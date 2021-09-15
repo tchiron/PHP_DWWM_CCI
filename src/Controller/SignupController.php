@@ -59,7 +59,7 @@ class SignupController
                             ->setPseudo($signup_post["pseudo"])
                             ->setEmail($signup_post["email"])
                             ->setPwd(password_hash($signup_post["pwd"], PASSWORD_DEFAULT));
-                        $userDao->addUser($signup_user);
+                        $userDao->newUser($signup_user);
                         $this->router->redirectToRoute();
                     } else {
                         $error_messages[] = "Cet email est déjà utilisé";

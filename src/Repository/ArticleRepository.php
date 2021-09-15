@@ -21,7 +21,7 @@ class ArticleRepository
         );
     }
 
-    function addArticle(Article $article): int
+    function newArticle(Article $article): int
     {
         $req = $this->pdo->prepare("INSERT INTO article (title, description)
                                         VALUES (:title, :description)");

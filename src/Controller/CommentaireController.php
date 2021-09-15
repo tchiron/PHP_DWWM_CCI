@@ -19,7 +19,7 @@ class CommentaireController
 
     public function new(int $article_id) {
         if ($this->request->getMethod() === "GET") {
-            require TEMPLATES . DIRECTORY_SEPARATOR . "commentaire/add.html.php";
+            require TEMPLATES . DIRECTORY_SEPARATOR . "commentaire/new.html.php";
         } elseif ($this->request->getMethod() === "POST") {
             $commentaire_post = [
                 "article_id" => $article_id,
@@ -31,14 +31,14 @@ class CommentaireController
             }
 
             if (!isset($commentaire_post["contenu"]) || !empty($error_messages)) {
-                require TEMPLATES . DIRECTORY_SEPARATOR . "commentaire/add.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR . "commentaire/new.html.php";
             } else {
                 $commentaire = (new Commentaire())
                     ->setIdArticle($commentaire_post["article_id"])
                     ->setContenu($commentaire_post["contenu"]);
 
                 try {
-                    (new CommentaireRepository())->addCommentaire($commentaire);
+                    (new CommentaireRepository())->newCommentaire($commentaire);
                     $this->router->redirectToRoute(sprintf("article/%d/show", $article_id));
                 } catch (PDOException $e) {
                     echo $e->getMessage();

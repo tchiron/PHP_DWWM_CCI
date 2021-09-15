@@ -21,7 +21,7 @@ class CommentaireRepository
         );
     }
 
-    public function addCommentaire(Commentaire $commentaire): void
+    public function newCommentaire(Commentaire $commentaire): void
     {
         $req = $this->pdo->prepare("INSERT INTO commentaire (contenu, id_article) VALUES (:contenu, :id_article)");
         $req->execute([
