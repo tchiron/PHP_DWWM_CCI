@@ -1,6 +1,6 @@
 <?php
 $title = "Editer un utilisateur";
-include 'header.php';
+include TEMPLATES . DIRECTORY_SEPARATOR . 'header.php';
 
 if (!empty($error_messages)) :
 ?>
@@ -43,4 +43,4 @@ if (!empty($error_messages)) :
     <input type="submit" value="Envoyer">
 </form>
 
-<?php include 'footer.php'; ?>
+<?php include TEMPLATES . DIRECTORY_SEPARATOR . 'footer.php'; ?>

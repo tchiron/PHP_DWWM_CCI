@@ -20,7 +20,7 @@ class SignupController
     public function index()
     {
         if ($this->request->getMethod() === "GET") {
-            require TEMPLATES . DIRECTORY_SEPARATOR . "index.html.php";
+            require TEMPLATES . DIRECTORY_SEPARATOR . "signup/index.html.php";
         } elseif ($this->request->getMethod() === "POST") {
             $args = [
                 "pseudo" => [
@@ -63,13 +63,13 @@ class SignupController
                         $this->router->redirectToRoute();
                     } else {
                         $error_messages[] = "Cet email est déjà utilisé";
-                        require TEMPLATES . DIRECTORY_SEPARATOR . "index.html.php";
+                        require TEMPLATES . DIRECTORY_SEPARATOR . "signup/index.html.php";
                     }
                 } catch (PDOException $e) {
                     echo $e->getMessage();
                 }
             } else {
-                require TEMPLATES . DIRECTORY_SEPARATOR . "index.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR . "signup/index.html.php";
             }
         }
     }

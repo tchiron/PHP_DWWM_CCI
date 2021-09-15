@@ -20,7 +20,7 @@ class ArticleController
     {
         try {
             $articles = (new ArticleRepository())->getAllArticle();
-            require TEMPLATES . DIRECTORY_SEPARATOR . "index.html.php";
+            require TEMPLATES . DIRECTORY_SEPARATOR . "article/index.html.php";
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -29,7 +29,7 @@ class ArticleController
     public function new()
     {
         if ("GET" === $this->request->getMethod()) {
-            require TEMPLATES . DIRECTORY_SEPARATOR . "add.html.php";
+            require TEMPLATES . DIRECTORY_SEPARATOR . "article/add.html.php";
         } elseif ("POST" === $this->request->getMethod()) {
             $args = [
                 "title" => [
@@ -54,7 +54,7 @@ class ArticleController
             }
 
             if (!(isset($article_post["title"]) && isset($article_post["description"])) || !empty($error_messages)) {
-                require TEMPLATES . DIRECTORY_SEPARATOR . "add.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR . "article/add.html.php";
             } else {
                 $article = (new Article())
                     ->setTitle($article_post["title"])
@@ -77,7 +77,7 @@ class ArticleController
     
             if (!is_null($article)) {
                 $commentaires = (new CommentaireRepository())->getCommentaireByArticleId($id);
-                require TEMPLATES . DIRECTORY_SEPARATOR ."show.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR ."article/show.html.php";
             } else {
                 $this->router->redirectToRoute();
             }
@@ -93,7 +93,7 @@ class ArticleController
                 $article = (new ArticleRepository())->getArticleById($id);
     
                 if (!is_null($article)) {
-                    require TEMPLATES . DIRECTORY_SEPARATOR . "edit.html.php";
+                    require TEMPLATES . DIRECTORY_SEPARATOR . "article/edit.html.php";
                 } else {
                     $this->router->redirectToRoute();
                 }
@@ -127,7 +127,7 @@ class ArticleController
             }
     
             if (!(isset($article_post["title"]) && isset($article_post["description"])) || !empty($error_messages)) {
-                require TEMPLATES . DIRECTORY_SEPARATOR . "edit.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR . "article/edit.html.php";
             } else {
                 $article = (new Article())
                     ->setId_article($id)

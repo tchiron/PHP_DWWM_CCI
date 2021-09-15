@@ -1,6 +1,6 @@
 <?php
 $title = "Affiche tous les articles";
-include 'header.php';
+include TEMPLATES . DIRECTORY_SEPARATOR . 'header.php';
 
 foreach ($articles as $article) : ?>
     <article>
@@ -10,4 +10,4 @@ foreach ($articles as $article) : ?>
     </article>
 
 <?php endforeach;
-include 'footer.php'; ?>
+include TEMPLATES . DIRECTORY_SEPARATOR . 'footer.php'; ?>

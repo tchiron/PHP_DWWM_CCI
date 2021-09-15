@@ -21,7 +21,7 @@ class UserController
     {
         try {
             $listUsers = (new UserRepository())->getAllUser();
-            require TEMPLATES . DIRECTORY_SEPARATOR . "index.html.php";
+            require TEMPLATES . DIRECTORY_SEPARATOR . "user/index.html.php";
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -34,7 +34,7 @@ class UserController
             $user = $userDao->getUserById($id);
 
             if (!is_null($user)) {
-                require TEMPLATES . DIRECTORY_SEPARATOR . "show.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR . "user/show.html.php";
             } else {
                 $this->router->redirectToRoute();
             }
@@ -53,7 +53,7 @@ class UserController
 
             if ($this->request->getMethod() === "GET") {
                 if (!is_null($user)) {
-                    require TEMPLATES . DIRECTORY_SEPARATOR . "edit.html.php";
+                    require TEMPLATES . DIRECTORY_SEPARATOR . "user/edit.html.php";
                 } else {
                     $this->router->redirectToRoute();
                 }
@@ -144,7 +144,7 @@ class UserController
                     $userDao->updateUser($edit_user);
                     $this->router->redirectToRoute(sprintf("user/%d/show", $id));
                 } else {
-                    require TEMPLATES . DIRECTORY_SEPARATOR . "edit.html.php";
+                    require TEMPLATES . DIRECTORY_SEPARATOR . "user/edit.html.php";
                 }
             }
         } catch (PDOException $e) {

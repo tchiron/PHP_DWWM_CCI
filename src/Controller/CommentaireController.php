@@ -19,7 +19,7 @@ class CommentaireController
 
     public function new(int $article_id) {
         if ($this->request->getMethod() === "GET") {
-            require TEMPLATES . DIRECTORY_SEPARATOR . "add.html.php";
+            require TEMPLATES . DIRECTORY_SEPARATOR . "commentaire/add.html.php";
         } elseif ($this->request->getMethod() === "POST") {
             $commentaire_post = [
                 "article_id" => $article_id,
@@ -31,7 +31,7 @@ class CommentaireController
             }
 
             if (!isset($commentaire_post["contenu"]) || !empty($error_messages)) {
-                require TEMPLATES . DIRECTORY_SEPARATOR . "add.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR . "commentaire/add.html.php";
             } else {
                 $commentaire = (new Commentaire())
                     ->setIdArticle($commentaire_post["article_id"])
@@ -55,7 +55,7 @@ class CommentaireController
         if ($this->request->getMethod() === "GET") {
             try {
                 $commentaire = (new CommentaireRepository())->getCommentaireById($commentaire_id);
-                require TEMPLATES . DIRECTORY_SEPARATOR . "edit.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR . "commentaire/edit.html.php";
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
@@ -67,7 +67,7 @@ class CommentaireController
             }
 
             if (!empty($error_messages)) {
-                require TEMPLATES . DIRECTORY_SEPARATOR . "edit.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR . "commentaire/edit.html.php";
             } else {
                 $commentaire->setContenu($commentaire_post["contenu"]);
 

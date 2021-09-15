@@ -1,6 +1,6 @@
 <?php
 $title = "Liste des utilisateurs";
-include 'header.php';
+include TEMPLATES . DIRECTORY_SEPARATOR . 'header.php';
 
 if (!empty($error_messages)) : ?>
     <div>
@@ -60,5 +60,4 @@ else :
 <?php
 endif;
 
-include 'footer.php';
-?>
+include TEMPLATES . DIRECTORY_SEPARATOR . 'footer.php'; ?>

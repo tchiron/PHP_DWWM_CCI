@@ -1,6 +1,6 @@
 <?php
 $title = "Editer un article";
-include 'header.php';
+include TEMPLATES . DIRECTORY_SEPARATOR . 'header.php';
 
 if (!empty($error_messages)) : ?>
     <div>
@@ -16,4 +16,4 @@ if (!empty($error_messages)) : ?>
     <textarea name="description" id="description" cols="30" rows="10"><?= $article->getDescription() ?></textarea>
     <input type="submit" value="Envoyer">
 </form>
-<?php include 'footer.php'; ?>
+<?php include TEMPLATES . DIRECTORY_SEPARATOR . 'footer.php'; ?>

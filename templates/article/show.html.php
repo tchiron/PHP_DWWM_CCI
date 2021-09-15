@@ -1,6 +1,6 @@
 <?php
 $title = sprintf("Affiche l'article %d", $article->getId_article());
-include 'header.php';
+include TEMPLATES . DIRECTORY_SEPARATOR . 'header.php';
 ?>
 <article>
     <h1><?= trim(filter_var($article->getTitle(), FILTER_SANITIZE_FULL_SPECIAL_CHARS)) ?></h1>
@@ -21,4 +21,4 @@ include 'header.php';
     </div>
 <?php endif; ?>
 
-<?php include 'footer.php'; ?>
+<?php include TEMPLATES . DIRECTORY_SEPARATOR . 'footer.php'; ?>

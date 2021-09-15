@@ -20,7 +20,7 @@ class SigninController
     public function index()
     {
         if ($this->request->getMethod() === "GET") {
-            require TEMPLATES . DIRECTORY_SEPARATOR . "index.html.php";
+            require TEMPLATES . DIRECTORY_SEPARATOR . "signin/index.html.php";
         } elseif ($this->request->getMethod() === "POST") {
             $args = [
                 "email" => [
@@ -56,17 +56,17 @@ class SigninController
                             $this->router->redirectToRoute();
                         } else {
                             $error_messages[] = "Mot de passe erroné";
-                            require TEMPLATES . DIRECTORY_SEPARATOR . "index.html.php";
+                            require TEMPLATES . DIRECTORY_SEPARATOR . "signin/index.html.php";
                         }
                     } else {
                         $error_messages[] = "Email erroné";
-                        require TEMPLATES . DIRECTORY_SEPARATOR . "index.html.php";
+                        require TEMPLATES . DIRECTORY_SEPARATOR . "signin/index.html.php";
                     }
                 } catch (PDOException $e) {
                     echo $e->getMessage();
                 }
             } else {
-                require TEMPLATES . DIRECTORY_SEPARATOR . "index.html.php";
+                require TEMPLATES . DIRECTORY_SEPARATOR . "signin/index.html.php";
             }
         }
     }
