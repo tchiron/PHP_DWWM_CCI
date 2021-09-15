@@ -5,7 +5,8 @@ namespace framework;
 use Closure;
 use controller\{ArticleController,
     UserController,
-    SignupController
+    SignupController,
+    SigninController
 };
 
 class Router
@@ -125,6 +126,17 @@ class Router
                     $this->redirectToRoute();
                 elseif ($request->getMethod() === "GET" || $request->getMethod() === "POST")
                     (new SignupController($request, $router, $session))->index();
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/signin$#", $uri) => function (
+                Request $request,
+                Router  $router,
+                Session $session
+            ) {
+                if (!is_null($session->getUser()))
+                    $this->redirectToRoute();
+                elseif ($request->getMethod() === "GET" || $request->getMethod() === "POST")
+                    (new SigninController($request, $router, $session))->index();
                 else $this->redirectToRoute("error404");
             },
             default => function () {
