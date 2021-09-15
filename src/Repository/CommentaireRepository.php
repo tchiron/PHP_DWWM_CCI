@@ -7,15 +7,11 @@ use PDO;
 
 class CommentaireRepository
 {
-    private $pdo;
+    private PDO $pdo;
 
     public function __construct()
     {
-        $conf = [
-            "dsn" => "mysql:host=localhost;dbname=ccib;charset=UTF8",
-            "user" => "root",
-            "password" => "",
-        ];
+        $conf = parse_ini_file(MYSQL_FILE_PATH, false, INI_SCANNER_TYPED);
         $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
         $this->pdo = new PDO(
             $conf["dsn"],
@@ -25,7 +21,7 @@ class CommentaireRepository
         );
     }
 
-    public function addCommentaire(Commentaire $commentaire): void
+    public function newCommentaire(Commentaire $commentaire): void
     {
         $req = $this->pdo->prepare("INSERT INTO commentaire (contenu, id_article) VALUES (:contenu, :id_article)");
         $req->execute([

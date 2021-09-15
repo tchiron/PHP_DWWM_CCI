@@ -2,9 +2,13 @@
     "name": "ccib/blog",
     "autoload": {
         "psr-4": {
+            "framework\\": "framework/",
+            "controller\\": "src/Controller/",
             "entity\\": "src/Entity/",
             "repository\\": "src/Repository/"
         }
     },
-    "require": {}
+    "require-dev": {
+        "symfony/var-dumper": "^5.3"
+    }
 }

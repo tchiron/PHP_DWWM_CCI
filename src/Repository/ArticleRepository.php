@@ -7,15 +7,11 @@ use PDO;
 
 class ArticleRepository
 {
-    private $pdo;
+    private PDO $pdo;
 
     public function __construct()
     {
-        $conf = [
-            "dsn" => "mysql:host=localhost;dbname=ccib;charset=UTF8",
-            "user" => "root",
-            "password" => "",
-        ];
+        $conf = parse_ini_file(MYSQL_FILE_PATH, false, INI_SCANNER_TYPED);
         $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
         $this->pdo = new PDO(
             $conf["dsn"],
@@ -25,7 +21,7 @@ class ArticleRepository
         );
     }
 
-    function addArticle(Article $article): int
+    function newArticle(Article $article): int
     {
         $req = $this->pdo->prepare("INSERT INTO article (title, description)
                                         VALUES (:title, :description)");

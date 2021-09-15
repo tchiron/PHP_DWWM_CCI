@@ -11,11 +11,7 @@ class UserRepository
 
     public function __construct()
     {
-        $conf = [
-            "dsn" => "mysql:host=localhost;dbname=ccib;charset=UTF8",
-            "user" => "root",
-            "password" => "",
-        ];
+        $conf = parse_ini_file(MYSQL_FILE_PATH, false, INI_SCANNER_TYPED);
         $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
         $this->pdo = new PDO(
             $conf["dsn"],
@@ -25,7 +21,7 @@ class UserRepository
         );
     }
 
-    public function addUser(User $user): void
+    public function newUser(User $user): void
     {
         $req = $this->pdo->prepare("INSERT INTO user (pseudo, email, pwd) VALUES (:pseudo, :email, :pwd)");
         $req->execute([
