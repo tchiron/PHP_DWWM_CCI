@@ -4,14 +4,8 @@ use framework\{Request, Session, Router};
 
 require "../config/setup.php";
 
-session_start();
-$session = new Session(
-    ($_SESSION["user"]) ?? null
-);
-$request = new Request(
-    filter_input(INPUT_SERVER, "REQUEST_URI"),
-    filter_input(INPUT_SERVER, "REQUEST_METHOD")
-);
+$session = new Session();
+$request = new Request();
 
 $router = new Router($request);
 

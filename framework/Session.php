@@ -6,9 +6,12 @@ use entity\User;
 
 class Session
 {
-    public function __construct(
-        private ?User $user
-    ) {
+    private ?User $user;
+
+    public function __construct()
+    {
+        session_start();
+        $this->user = $_SESSION["user"] ?? null;
     }
 
     /**

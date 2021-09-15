@@ -4,10 +4,13 @@ namespace framework;
 
 class Request
 {
-    public function __construct(
-        private string $uri,
-        private string $method
-    ) {
+    private string $uri;
+    private string $method;
+    
+    public function __construct()
+    {
+        $this->uri = filter_input(INPUT_SERVER, "REQUEST_URI");
+        $this->method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
     }
 
     /**
