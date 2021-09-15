@@ -11,7 +11,7 @@ class Session
     public function __construct()
     {
         session_start();
-        $this->user = isset($_SESSION["user"]) ? unserialize($_SESSION["user"]) : null;
+        $this->user = $_SESSION["user"] ?? null;
     }
 
     /**

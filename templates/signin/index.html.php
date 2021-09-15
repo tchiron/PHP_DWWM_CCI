@@ -1,6 +1,6 @@
 <?php
 $title = "Identifiez vous !";
-include 'header.php';
+include TEMPLATES . DIRECTORY_SEPARATOR . 'header.php';
 
 if (!empty($error_messages)) : ?>
     <div>
@@ -13,10 +13,9 @@ if (!empty($error_messages)) : ?>
 <?php endif; ?>
 
 <form action="" method="post">
-    <label for="pseudo">Pseudo : </label><input type="text" name="pseudo" id="pseudo">
     <label for="email">Email : </label><input type="text" name="email" id="email">
     <label for="pwd">Mot de passe : </label><input type="password" name="pwd" id="pwd">
     <input type="submit" value="Envoyer">
 </form>
 
-<?php include 'footer.php'; ?>
+<?php include TEMPLATES . DIRECTORY_SEPARATOR . 'footer.php'; ?>

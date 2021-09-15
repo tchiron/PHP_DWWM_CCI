@@ -21,7 +21,7 @@ class UserRepository
         );
     }
 
-    public function addUser(User $user): void
+    public function newUser(User $user): void
     {
         $req = $this->pdo->prepare("INSERT INTO user (pseudo, email, pwd) VALUES (:pseudo, :email, :pwd)");
         $req->execute([

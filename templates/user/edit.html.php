@@ -1,6 +1,6 @@
 <?php
 $title = "Editer un utilisateur";
-include 'header.php';
+include TEMPLATES . DIRECTORY_SEPARATOR . 'header.php';
 
 if (!empty($error_messages)) :
 ?>
@@ -13,7 +13,7 @@ if (!empty($error_messages)) :
     </div>
 <?php endif; ?>
 
-<form action="<?= sprintf("edit_user_controller.php?id=%d", $user->getId_user()); ?>" method="post">
+<form action="" method="post">
     <label for="nom">Nom : </label><input type="text" name="nom" id="nom" value="<?= $user->getNom() ?>">
     <br>
     <label for="prenom">Prénom : </label><input type="text" name="prenom" id="prenom" value="<?= $user->getPrenom() ?>">
@@ -43,4 +43,4 @@ if (!empty($error_messages)) :
     <input type="submit" value="Envoyer">
 </form>
 
-<?php include 'footer.php'; ?>
+<?php include TEMPLATES . DIRECTORY_SEPARATOR . 'footer.php'; ?>

@@ -1,6 +1,6 @@
 <?php
-$title = (unserialize($_SESSION["user"])->getId_user() === $user->getId_user()) ? "Mon profil" : sprintf("Le profil de %s", $user->getPseudo());
-include 'header.php';
+$title = ($this->session->getUser()->getId_user() === $user->getId_user()) ? "Mon profil" : sprintf("Le profil de %s", $user->getPseudo());
+include TEMPLATES . DIRECTORY_SEPARATOR . 'header.php';
 ?>
 
 <div><span>Nom : </span><span><?= $user->getNom() ?? 'N/A'; ?></span></div>
@@ -11,6 +11,6 @@ include 'header.php';
 <div><span>Genre : </span><span><?= $user->getGenre() ?? 'N/A'; ?></span></div>
 <div><span>Groupe : </span><span><?= $user->getGroup() ?? 'N/A'; ?></span></div>
 
-<a href="edit_user_controller.php?id=<?= $user->getId_user() ?>">Modifier le profil</a>
+<a href="/user/<?= $user->getId_user() ?>/edit">Modifier le profil</a>
 
-<?php include 'footer.php'; ?>
+<?php include TEMPLATES . DIRECTORY_SEPARATOR . 'footer.php'; ?>

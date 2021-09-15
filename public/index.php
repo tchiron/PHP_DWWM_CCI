@@ -1,11 +1,12 @@
 <?php
 
-use framework\Request;
-use framework\Session;
+use framework\{Request, Session, Router};
 
 require "../config/setup.php";
 
 $session = new Session();
 $request = new Request();
 
-dump($request->getUri(), $request->getMethod(), $session->getUser());
+$router = new Router($request);
+
+call_user_func_array($router->getCallback(), [$request, $router, $session, $router->getMatches()]);

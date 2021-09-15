@@ -3,6 +3,7 @@
     "autoload": {
         "psr-4": {
             "framework\\": "framework/",
+            "controller\\": "src/Controller/",
             "entity\\": "src/Entity/",
             "repository\\": "src/Repository/"
         }
