@@ -3,7 +3,9 @@
 namespace framework;
 
 use Closure;
-use controller\ArticleController;
+use controller\{ArticleController,
+    UserController
+};
 
 class Router
 {
@@ -72,6 +74,45 @@ class Router
             ) {
                 if ("GET" === $request->getMethod())
                     (new ArticleController($request, $router, $session))->delete($matches[1]);
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/user$#", $uri) => function (
+                Request $request,
+                Router  $router,
+                Session $session
+            ) {
+                if ($request->getMethod() === "GET")
+                    (new UserController($request, $router, $session))->index();
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/user/([0-9]+)/show$#", $uri, $this->matches) => function (
+                Request $request,
+                Router  $router,
+                Session $session,
+                array   $matches
+            ) {
+                if ($request->getMethod() === "GET")
+                    (new UserController($request, $router, $session))->show($matches[1]);
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/user/([0-9]+)/edit$#", $uri, $this->matches) => function (
+                Request $request,
+                Router  $router,
+                Session $session,
+                array   $matches
+            ) {
+                if ($request->getMethod() === "GET" || $request->getMethod() === "POST")
+                    (new UserController($request, $router, $session))->edit($matches[1]);
+                else $this->redirectToRoute("error404");
+            },
+            preg_match("#^/user/([0-9]+)/delete$#", $uri, $this->matches) => function (
+                Request $request,
+                Router  $router,
+                Session $session,
+                array   $matches
+            ) {
+                if ($request->getMethod() === "GET")
+                    (new UserController($request, $router, $session))->delete($matches[1]);
                 else $this->redirectToRoute("error404");
             },
             default => function () {
